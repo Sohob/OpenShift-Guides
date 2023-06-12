@@ -8,13 +8,13 @@ From developer view > + Add > Developer Catalog > All Services. Search for Jenki
 
 Next, instantiate the template and check the configs. For now, the default settings should do.
 
-![Example](https://imgur.com/6HEOVMm)
+![Example](https://i.imgur.com/6HEOVMm.png)
 ### 2. Jenkins Startup
 After the pod is up and running, you can click the route URL that was created for the application. You should see the Jenkins setup asking you to log in. If it is not working, make sure that the route is configured on port 8080, not 50000.
 
 The password for logging in is found in a directory on the running container, or simply, you can find it in the logs of the pod.
 
-![First login password](https://imgur.com/itz9YzE)
+![First login password](https://i.imgur.com/itz9YzE.png)
 
 After logging in, you'll be asked to create a user. Fill in the credentials you want, and then create. After that, you'll be able to install the plugins you want to use. Select all plugins that you want to install. Finally, you'll be asked to confirm the URL for Jenkins. You can continue with the default. After this step, you should be seeing Jenkins dashboard.
 
@@ -23,9 +23,12 @@ Click on New Item from the dashboard, and create a Pipeline. In General, select 
 
 Under Build Triggers, check GitHub hook trigger for GITScm polling. Finally, under pipeline, set the definition to be Pipeline script from SCM, and add the GitHub repo.
 
-![Linking a repo](https://imgur.com/kB5XF2S)
+![Linking a repo](https://i.imgur.com/kB5XF2S.png)
 
 Now we have created a pipeline that is connected to our repo, and gets the pipeline script from there. You can check the Jenkinsfile in the repo for more info.
 
 When we push to the repo, Jenkins detects and starts executing the pipline stages autonomously. Or you can just build manually by clicking build now.
 
+### And that's it!
+
+> Written by [Mostafa Abdelnasser](https://linkedin.com/in/mostafa-abdelnasser)
