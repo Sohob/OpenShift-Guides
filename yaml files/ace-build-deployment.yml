@@ -1,0 +1,80 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  annotations:
+    alpha.image.policy.openshift.io/resolve-names: '*'
+    app.openshift.io/route-disabled: 'false'
+    deployment.kubernetes.io/revision: '15'
+    image.openshift.io/triggers: >-
+      [{"from":{"kind":"ImageStreamTag","name":"ace-build:12.0.8.0","namespace":"cp4i-arb-mig"},"fieldPath":"spec.template.spec.containers[?(@.name==\"ace-build\")].image","pause":"false"}]
+    openshift.io/generated-by: OpenShiftWebConsole
+  name: ace-build
+  namespace: cp4i-arb-mig
+  labels:
+    app: ace-build
+    app.kubernetes.io/component: ace-build
+    app.kubernetes.io/instance: ace-build
+    app.kubernetes.io/name: ace-build
+    app.kubernetes.io/part-of: arb-mig
+    app.openshift.io/runtime: ace-build
+    app.openshift.io/runtime-namespace: cp4i-arb-mig
+    app.openshift.io/runtime-version: 12.0.8.0
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ace-build
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: ace-build
+        deploymentconfig: ace-build
+      annotations:
+        openshift.io/generated-by: OpenShiftWebConsole
+    spec:
+      volumes:
+        - name: ace-build
+          persistentVolumeClaim:
+            claimName: ace-build-data
+        - name: cache-volume
+          emptyDir: {}
+      containers:
+        - resources: {}
+          terminationMessagePath: /dev/termination-log
+          name: ace-build
+          env:
+            - name: LICENSE
+              value: accept
+            - name: HOME
+              value: /home
+          securityContext:
+            allowPrivilegeEscalation: false
+          ports:
+            - containerPort: 7600
+              protocol: TCP
+            - containerPort: 7800
+              protocol: TCP
+            - containerPort: 7843
+              protocol: TCP
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+            - name: ace-build
+              mountPath: /home
+            - name: cache-volume
+              mountPath: /IBM
+          terminationMessagePolicy: File
+          image: >-
+            image-registry.openshift-image-registry.svc:5000/cp4i-arb-mig/ace-build@sha256:e658c9d69f0f211ddb77f3b066dc308bbaf6648b81d3a2daa21224e9d2ed14fd
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      securityContext: {}
+      schedulerName: default-scheduler
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 25%
+      maxSurge: 25%
+  revisionHistoryLimit: 10
+  progressDeadlineSeconds: 600
