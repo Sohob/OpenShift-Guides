@@ -4,7 +4,7 @@ The demo should have a simple Maven application. We will also create a pipeline 
 
 ## Setup
 ### 1. Create Jenkins
-From developer view > + Add > Developer Catalog > All Services. Search for Jenkins and pick the Ephemeral template in case of testing. This stores no data on reboot.
+From Developer View > + Add > Developer Catalog > All Services. Search for Jenkins and pick the Ephemeral template in case of testing. This stores no data on reboot.
 
 Next, instantiate the template and check the configs. For now, the default settings should do.
 
@@ -16,18 +16,18 @@ The password for logging in is found in a directory on the running container, or
 
 ![First login password](https://i.imgur.com/itz9YzE.png)
 
-After logging in, you'll be asked to create a user. Fill in the credentials you want, and then create. After that, you'll be able to install the plugins you want to use. Select all plugins that you want to install. Finally, you'll be asked to confirm the URL for Jenkins. You can continue with the default. After this step, you should be seeing Jenkins dashboard.
+After logging in, you'll be asked to create a user. Fill in the credentials you want, and then create. After that, you'll be able to install the plugins you want to use. Select all plugins that you want to install. Finally, you'll be asked to confirm the URL for Jenkins. You can continue with the default. After this step, you should see seeing Jenkins dashboard.
 
 ### 3. Create a Pipeline
-Click on New Item from the dashboard, and create a Pipeline. In General, select GitHub project, and enter the GitHub repo URL: https://github.com/Sohob/openshift-jee-sample
+Click on New Item from the dashboard, and create a Pipeline. In General, select the GitHub project, and enter the GitHub repo URL: https://github.com/Sohob/openshift-jee-sample
 
-Under Build Triggers, check GitHub hook trigger for GITScm polling. Finally, under pipeline, set the definition to be Pipeline script from SCM, and add the GitHub repo.
+Under Build Triggers, check the GitHub hook trigger for GITScm polling. Finally, under pipeline, set the definition to be Pipeline script from SCM, and add the GitHub repo.
 
 ![Linking a repo](https://i.imgur.com/kB5XF2S.png)
 
-Now we have created a pipeline that is connected to our repo, and gets the pipeline script from there. You can check the Jenkinsfile in the repo for more info.
+Now we have created a pipeline connected to our repo, and get the pipeline script from there. You can check the Jenkinsfile in the repo for more info.
 
-When we push to the repo, Jenkins detects and starts executing the pipline stages autonomously. Or you can just build manually by clicking build now.
+When we push to the repo, Jenkins detects and starts executing the pipeline stages autonomously. Or you can just build manually by clicking Build now.
 
 ### And that's it!
 
