@@ -1,4 +1,4 @@
-# How to push you binary container image to OpenShift
+# How to push your binary container image to OpenShift
 
 ### Load the binary image
 
